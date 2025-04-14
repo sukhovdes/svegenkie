@@ -1,46 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>MiniApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="main" class="screen active">
-    <h1 id="greeting">Привет!</h1>
-    <div class="menu">
-      <button onclick="openScreen('rules')">📘 Правила</button>
-      <button onclick="openScreen('activity')">🔥 Активность</button>
-      <button onclick="openScreen('comments')">💬 Хочу комменты и лайки</button>
+    <div class="container">
+        <h1 class="title">Привет, @Maxim 👋</h1>
+        <div class="menu">
+            <a href="rules.html" class="menu-item">
+                <span>📘 Наши правила</span>
+            </a>
+            <a href="activity.html" class="menu-item">
+                <span>🔥 Активность</span>
+            </a>
+            <a href="chat.html" class="menu-item">
+                <span>💬 Чат</span>
+            </a>
+        </div>
     </div>
-  </div>
-
-  <div id="rules" class="screen">
-    <div class="top">
-      <button class="back" onclick="goBack()">← Назад</button>
-      <h2>📘 Правила</h2>
-    </div>
-    <p>Здесь будут правила сообщества.</p>
-  </div>
-
-  <div id="activity" class="screen">
-    <div class="top">
-      <button class="back" onclick="goBack()">← Назад</button>
-      <h2>🔥 Активность</h2>
-    </div>
-    <p>Здесь отображается активность участников.</p>
-  </div>
-
-  <div id="comments" class="screen">
-    <div class="top">
-      <button class="back" onclick="goBack()">← Назад</button>
-      <h2>💬 Хочу комменты и лайки</h2>
-    </div>
-    <p>Здесь можно запросить комменты и лайки от других участников.</p>
-  </div>
-
-  <script src="script.js"></script>
 </body>
-</html>
+</html> 
