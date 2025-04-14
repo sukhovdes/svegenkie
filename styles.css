@@ -85,6 +85,17 @@ body {
     font-weight: 700;
 }
 
+.content a {
+    color: #0088cc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.content a:hover {
+    color: #005580;
+    text-decoration: underline;
+}
+
 .back-button {
     display: flex;
     align-items: center;
