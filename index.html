@@ -8,14 +8,39 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div id="main" class="screen active">
     <h1 id="greeting">Привет!</h1>
     <div class="menu">
-      <a class="button" href="#rules">📘 Правила</a>
-      <a class="button" href="#activity">🔥 Активность</a>
-      <a class="button" href="#comments">💬 Хочу комменты и лайки</a>
+      <button onclick="openScreen('rules')">📘 Правила</button>
+      <button onclick="openScreen('activity')">🔥 Активность</button>
+      <button onclick="openScreen('comments')">💬 Хочу комменты и лайки</button>
     </div>
   </div>
+
+  <div id="rules" class="screen">
+    <div class="top">
+      <button class="back" onclick="goBack()">← Назад</button>
+      <h2>📘 Правила</h2>
+    </div>
+    <p>Здесь будут правила сообщества.</p>
+  </div>
+
+  <div id="activity" class="screen">
+    <div class="top">
+      <button class="back" onclick="goBack()">← Назад</button>
+      <h2>🔥 Активность</h2>
+    </div>
+    <p>Здесь отображается активность участников.</p>
+  </div>
+
+  <div id="comments" class="screen">
+    <div class="top">
+      <button class="back" onclick="goBack()">← Назад</button>
+      <h2>💬 Хочу комменты и лайки</h2>
+    </div>
+    <p>Здесь можно запросить комменты и лайки от других участников.</p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
