@@ -74,10 +74,37 @@
   </div>
 
   <!-- Активности -->
-  <div id="page-activities" class="page">
-    <h2>Активности</h2>
-    <p>Здесь можно посмотреть текущие активности.</p>
-  </div>
+ <!-- Активности -->
+<div id="page-activities" class="page">
+  <h2>Активности</h2>
+  <p>Оставь свою ссылку, и мы её покажем другим!</p>
+
+  <form id="linkForm">
+    <input type="url" name="link" placeholder="Ваша ссылка" required style="width: 100%; padding: 10px; margin: 12px 0; font-size: 16px; border-radius: 6px; border: 1px solid #ccc;" />
+    <button type="submit">Отправить</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('linkForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const link = e.target.link.value.trim();
+    if (!link) return;
+
+    try {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbyuAUU1Wk3fxpebuPBd3Y2DkrboTpzFmLF2GeFbOq6mfycmg0i0FFYD_MXD04n-Rq7LaA/exec", {
+        method: "POST",
+        body: new URLSearchParams({ link }),
+      });
+      const text = await res.text();
+      alert(text || "Готово!");
+      e.target.reset();
+    } catch (err) {
+      alert("Ошибка при отправке ссылки 😢");
+    }
+  });
+</script>
+
 
   <!-- Друзья -->
   <div id="page-friends" class="page">
