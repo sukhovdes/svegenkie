@@ -25,13 +25,16 @@
       opacity: 1;
     }
 
-    h2, p, button {
+    h2 {
       font-size: 24px;
-      letter-spacing: -0.15em;
+      letter-spacing: -0.05em; /* уменьшено на 5% */
     }
 
     .highlight {
-      color: #1DA1F2;
+      background: linear-gradient(90deg, #36C6F0, #1DA1F2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
     }
 
     button {
@@ -42,6 +45,7 @@
       border: none;
       padding: 18px 16px;
       margin: 12px 0;
+      font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.2s ease;
