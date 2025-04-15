@@ -27,7 +27,7 @@
 
     h2 {
       font-size: 24px;
-      letter-spacing: -0.05em; /* уменьшено на 5% */
+      letter-spacing: -0.05em;
     }
 
     .highlight {
@@ -55,41 +55,40 @@
       background-color: #cfe6ff;
     }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
-}
+    /* ====== СТИЛИ ДЛЯ ФОРМЫ ====== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+      text-align: left;
+    }
 
-form input[type="url"] {
-  width: 100%;
-  padding: 16px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+    form input[type="url"] {
+      width: 100%;
+      padding: 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
 
-form button {
-  height: 56px;
-  background-color: #1D60F1;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s ease;
-}
+    form button {
+      height: 56px;
+      background-color: #1D60F1;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
 
-form button:hover {
-  background-color: #1550d8;
-}
-
-
-    
+    form button:hover {
+      background-color: #1550d8;
+    }
   </style>
 </head>
 <body>
@@ -109,16 +108,16 @@ form button:hover {
     <p>Здесь будут описаны правила сообщества.</p>
   </div>
 
-<!-- Активности -->
-<div id="page-activities" class="page">
-  <h2>Активности</h2>
-  <p>Оставь свою ссылку, и мы её покажем другим!</p>
+  <!-- Активности -->
+  <div id="page-activities" class="page">
+    <h2>Активности</h2>
+    <p>Оставь свою ссылку, и мы её покажем другим!</p>
 
-  <form id="linkForm">
-    <input type="url" name="link" placeholder="Ваша ссылка" required style="width: 100%; padding: 10px; margin: 12px 0; font-size: 16px; border-radius: 6px; border: 1px solid #ccc;" />
-    <button type="submit">Отправить</button>
-  </form>
-</div>
+    <form id="linkForm">
+      <input type="url" name="link" placeholder="Ваша ссылка" required />
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
 
   <!-- Друзья -->
   <div id="page-friends" class="page">
@@ -126,26 +125,6 @@ form button:hover {
     <p>Здесь будут отображаться твои друзья.</p>
   </div>
 
-<script>
-  document.getElementById('linkForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const link = e.target.link.value.trim();
-    if (!link) return;
-
-    try {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbzBa71y9rAxrdzw861B75fFnRpoYzECLKjJ8-mIEFmd6yKKXPczfEjC-WTV4EoLja-S/exec", {
-        method: "POST",
-        body: new URLSearchParams({ link }),
-      });
-      const text = await res.text();
-      alert(text || "Готово!");
-      e.target.reset();
-    } catch (err) {
-      alert("Ошибка при отправке ссылки 😢");
-    }
-  });
-</script>
-  
   <script>
     const tg = window.Telegram.WebApp;
     const navStack = ['home'];
@@ -192,6 +171,25 @@ form button:hover {
 
     tg.ready();
     updateBackButton();
+
+    // Отправка формы
+    document.getElementById('linkForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const link = e.target.link.value.trim();
+      if (!link) return;
+
+      try {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbzBa71y9rAxrdzw861B75fFnRpoYzECLKjJ8-mIEFmd6yKKXPczfEjC-WTV4EoLja-S/exec", {
+          method: "POST",
+          body: new URLSearchParams({ link }),
+        });
+        const text = await res.text();
+        alert(text || "Готово!");
+        e.target.reset();
+      } catch (err) {
+        alert("Ошибка при отправке ссылки 😢");
+      }
+    });
   </script>
 </body>
 </html>
