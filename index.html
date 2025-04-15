@@ -48,9 +48,35 @@
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
     }
 
+    /* Специальные стили для кнопок на главной */
+    .main-btn {
+      border: 1px solid #E0E3ED;
+      background: #FFF;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+      color: #000;
+    }
+
+    .main-btn:hover:enabled {
+      background-color: #f0f0f0;
+    }
+
+    .main-btn:active:enabled {
+      transform: scale(0.98);
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .main-btn:disabled {
+      background-color: #b0b0b0 !important;
+      cursor: not-allowed;
+      color: #ffffff !important;
+      border-color: #b0b0b0 !important;
+      box-shadow: none !important;
+    }
+
+    /* ====== СТИЛИ ДЛЯ ФОРМЫ ====== */
     form {
       display: flex;
       flex-direction: column;
@@ -110,9 +136,9 @@
   <div id="page-home" class="page active">
     <h2>Привет, <span class="highlight">свеженький</span>!</h2>
     <p>Выбери раздел:</p>
-    <button onclick="goTo('rules')">📜 Правила</button>
-    <button onclick="goTo('activities')">🎯 Активности</button>
-    <button onclick="goTo('friends')">👥 Друзья</button>
+    <button class="main-btn" onclick="goTo('rules')">📜 Правила</button>
+    <button class="main-btn" onclick="goTo('activities')">🎯 Активности</button>
+    <button class="main-btn" onclick="goTo('friends')">👥 Друзья</button>
   </div>
 
   <!-- Правила -->
@@ -188,9 +214,19 @@
       document.body.style.backgroundColor = theme.bg_color || '#ffffff';
       document.body.style.color = theme.text_color || '#000000';
 
+      // Все обычные кнопки (форма и прочее)
       document.querySelectorAll('button').forEach(btn => {
-        btn.style.backgroundColor = theme.button_color || '#1D60F1';
-        btn.style.color = theme.button_text_color || '#ffffff';
+        if (!btn.classList.contains('main-btn')) {
+          btn.style.backgroundColor = theme.button_color || '#1D60F1';
+          btn.style.color = theme.button_text_color || '#ffffff';
+        }
+      });
+
+      // Специально для кнопок на главной
+      document.querySelectorAll('.main-btn').forEach(btn => {
+        btn.style.backgroundColor = theme.bg_color || '#ffffff';
+        btn.style.color = theme.text_color || '#000000';
+        btn.style.borderColor = theme.hint_color || '#cccccc';
       });
 
       const input = document.querySelector('input[type="url"]');
@@ -205,7 +241,7 @@
     applyTelegramTheme();
     updateBackButton();
 
-    // Обработка отправки ссылки
+    // Отправка формы
     document.getElementById('linkForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const link = e.target.link.value.trim();
