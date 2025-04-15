@@ -5,11 +5,13 @@
   <title>Mini App с навигацией</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Inter', sans-serif;
       padding: 20px;
       margin: 0;
+      text-align: center;
     }
 
     .page {
@@ -21,6 +23,14 @@
     .page.active {
       display: block;
       opacity: 1;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    .highlight {
+      color: #1DA1F2;
     }
 
     button {
@@ -46,29 +56,29 @@
 
   <!-- Главная -->
   <div id="page-home" class="page active">
-    <h2>Главная</h2>
+    <h2>Привет, <span class="highlight">свеженький</span>!</h2>
     <p>Выбери раздел:</p>
-    <button onclick="goTo('profile')">Профиль</button>
-    <button onclick="goTo('settings')">Настройки</button>
-    <button onclick="goTo('about')">О приложении</button>
+    <button onclick="goTo('rules')">📜 Правила</button>
+    <button onclick="goTo('activities')">🎯 Активности</button>
+    <button onclick="goTo('friends')">👥 Друзья</button>
   </div>
 
-  <!-- Профиль -->
-  <div id="page-profile" class="page">
-    <h2>Профиль</h2>
-    <p>Здесь твой профиль.</p>
+  <!-- Правила -->
+  <div id="page-rules" class="page">
+    <h2>Правила</h2>
+    <p>Здесь будут описаны правила сообщества.</p>
   </div>
 
-  <!-- Настройки -->
-  <div id="page-settings" class="page">
-    <h2>Настройки</h2>
-    <p>Тут настройки пользователя.</p>
+  <!-- Активности -->
+  <div id="page-activities" class="page">
+    <h2>Активности</h2>
+    <p>Здесь можно посмотреть текущие активности.</p>
   </div>
 
-  <!-- О приложении -->
-  <div id="page-about" class="page">
-    <h2>О приложении</h2>
-    <p>Это мини-аппа, созданная на чистом JS.</p>
+  <!-- Друзья -->
+  <div id="page-friends" class="page">
+    <h2>Друзья</h2>
+    <p>Здесь будут отображаться твои друзья.</p>
   </div>
 
   <script>
