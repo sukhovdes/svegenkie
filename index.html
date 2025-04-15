@@ -51,7 +51,6 @@
       transition: background-color 0.2s ease;
     }
 
-    /* ====== СТИЛИ ДЛЯ ФОРМЫ ====== */
     form {
       display: flex;
       flex-direction: column;
@@ -78,6 +77,30 @@
       cursor: pointer;
       text-align: center;
       transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top-color: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+      animation: spin 1s linear infinite;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -105,7 +128,10 @@
 
     <form id="linkForm">
       <input type="url" name="link" placeholder="Ваша ссылка" required />
-      <button type="submit">Отправить</button>
+      <button id="submitBtn" type="submit">
+        <span class="spinner hidden" id="spinner"></span>
+        <span id="btnText">Отправить</span>
+      </button>
     </form>
   </div>
 
@@ -124,7 +150,6 @@
       if (pageName !== currentPage) {
         navStack.push(pageName);
       }
-
       renderPage(pageName);
       updateBackButton();
     }
@@ -142,7 +167,6 @@
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
       });
-
       const nextPage = document.getElementById(`page-${pageName}`);
       if (nextPage) {
         nextPage.classList.add('active');
@@ -159,20 +183,16 @@
       }
     }
 
-    // Применение темы Telegram WebApp
     function applyTelegramTheme() {
       const theme = tg.themeParams;
-
       document.body.style.backgroundColor = theme.bg_color || '#ffffff';
       document.body.style.color = theme.text_color || '#000000';
 
-      // Все обычные кнопки
       document.querySelectorAll('button').forEach(btn => {
         btn.style.backgroundColor = theme.button_color || '#1D60F1';
         btn.style.color = theme.button_text_color || '#ffffff';
       });
 
-      // Поле ввода
       const input = document.querySelector('input[type="url"]');
       if (input) {
         input.style.backgroundColor = theme.secondary_bg_color || '#ffffff';
@@ -185,11 +205,19 @@
     applyTelegramTheme();
     updateBackButton();
 
-    // Отправка формы
+    // Обработка отправки ссылки
     document.getElementById('linkForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const link = e.target.link.value.trim();
       if (!link) return;
+
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Отправка…';
+      spinner.classList.remove('hidden');
 
       try {
         const res = await fetch("https://script.google.com/macros/s/AKfycbz6DatYMV-AjRjKtwy8aFiDC7S8uabrMEwxGrZAuZHKxmCsV7TTJbdTW4jRudjnTFPz/exec", {
@@ -201,6 +229,10 @@
         e.target.reset();
       } catch (err) {
         alert("Ошибка при отправке ссылки 😢");
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Отправить';
+        spinner.classList.add('hidden');
       }
     });
   </script>
