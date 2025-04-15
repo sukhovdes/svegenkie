@@ -24,8 +24,9 @@
 
     button {
       padding: 10px 20px;
-      margin-top: 10px;
+      margin: 10px 0;
       font-size: 16px;
+      width: 100%;
     }
   </style>
 </head>
@@ -34,15 +35,16 @@
   <!-- Главная -->
   <div id="page-home" class="page active">
     <h2>Главная</h2>
-    <p>Добро пожаловать!</p>
-    <button onclick="goTo('profile')">Перейти в профиль</button>
+    <p>Выбери раздел:</p>
+    <button onclick="goTo('profile')">Профиль</button>
+    <button onclick="goTo('settings')">Настройки</button>
+    <button onclick="goTo('about')">О приложении</button>
   </div>
 
   <!-- Профиль -->
   <div id="page-profile" class="page">
     <h2>Профиль</h2>
-    <p>Это раздел профиля.</p>
-    <button onclick="goTo('settings')">Перейти в настройки</button>
+    <p>Здесь твой профиль.</p>
   </div>
 
   <!-- Настройки -->
@@ -51,9 +53,15 @@
     <p>Тут настройки пользователя.</p>
   </div>
 
+  <!-- О приложении -->
+  <div id="page-about" class="page">
+    <h2>О приложении</h2>
+    <p>Это мини-аппа, созданная на чистом JS.</p>
+  </div>
+
   <script>
     const tg = window.Telegram.WebApp;
-    const navStack = ['home']; // стартовая страница
+    const navStack = ['home'];
 
     function goTo(pageName) {
       const currentPage = navStack[navStack.length - 1];
@@ -67,7 +75,7 @@
 
     function goBack() {
       if (navStack.length > 1) {
-        navStack.pop(); // удалить текущую
+        navStack.pop();
         const previousPage = navStack[navStack.length - 1];
         renderPage(previousPage);
         updateBackButton();
